@@ -11,8 +11,8 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun HomeScreenTextButton(
     text: String,
-    baseColor: Boolean,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    baseColor: Boolean
 ) {
     TextButton(
         onClick = onClick,
