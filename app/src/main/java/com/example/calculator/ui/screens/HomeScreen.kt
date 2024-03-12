@@ -15,6 +15,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.calculator.R
 
+
+
 @Composable
 fun HomeScreenBackspaceButton(
     onClickImage: () -> Unit,
@@ -26,7 +28,7 @@ fun HomeScreenBackspaceButton(
         modifier = modifier
     ) {
         Image(
-            painter = painterResource(R.drawable.ic_backspace),
+            painter = painterResource(R.drawable.ic_outline_backspace),
             contentDescription = null,
             contentScale = ContentScale.Crop,
             colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.primary),
@@ -38,7 +40,7 @@ fun HomeScreenBackspaceButton(
 fun HomeScreenTextButton(
     text: String,
     onClick: () -> Unit,
-    baseColor: Boolean
+    isPrimaryColor: Boolean
 ) {
     TextButton(
         onClick = onClick,
@@ -46,18 +48,19 @@ fun HomeScreenTextButton(
     ) {
         Text(
             text = text,
-            color = if (baseColor) MaterialTheme.colorScheme.onBackground else MaterialTheme.colorScheme.primary,
+            color = if (isPrimaryColor) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onBackground,
             style = MaterialTheme.typography.headlineMedium
         )
     }
 }
 
-@Preview
+
+@Preview()
 @Composable
 fun HomeScreenTextButtonPreview() {
     HomeScreenTextButton(
         text = "1",
-        baseColor = false,
+        isPrimaryColor = false,
         onClick = {}
     )
 }
@@ -67,4 +70,5 @@ fun HomeScreenTextButtonPreview() {
 fun HomeScreenBackspaceButtonPreview() {
     HomeScreenBackspaceButton(onClickImage = { /*TODO*/ })
 }
+
 
