@@ -6,10 +6,16 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -31,6 +37,71 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.calculator.R
+import com.example.calculator.data.local.LocalDigitDataProvider
+import com.example.calculator.data.local.LocalSymbolDataProvider
+
+@Composable
+fun HomeScreenButtonList(
+    modifier: Modifier = Modifier
+) {
+    Row(modifier = modifier) {
+        Box (modifier = Modifier.weight(3f)){
+            LazyVerticalGrid(columns = GridCells.Fixed(3)) {
+                item {
+                    HomeScreenTextButton(
+                        text = LocalSymbolDataProvider.clearSymbol.value,
+                        onClick = { /*TODO*/ },
+                        isPrimaryColor = true
+                    )
+                }
+                item {
+                    HomeScreenBackspaceButton(onClickImage = { /*TODO*/ }, modifier = Modifier.matchParentSize())
+                }
+                item {
+                    HomeScreenTextButton(
+                        text = LocalSymbolDataProvider.percentageSymbol.value,
+                        onClick = { /*TODO*/ },
+                        isPrimaryColor = true
+                    )
+                }
+                items(LocalDigitDataProvider.digits) {digit ->
+                    HomeScreenTextButton(
+                        text = digit.number,
+                        onClick = { /*TODO*/ },
+                        isPrimaryColor = false
+                    )
+                }
+                item { HomeScreenImageBorderAnimation(modifier = Modifier.matchParentSize()) }
+                items(LocalDigitDataProvider.zeroAndDot) {digit ->
+                    HomeScreenTextButton(
+                        text = digit.number,
+                        onClick = { /*TODO*/ },
+                        isPrimaryColor =false
+                    )
+                }
+            }
+        }
+        Box (modifier = Modifier.weight(1f)){
+            LazyVerticalGrid(columns = GridCells.Fixed(1)) {
+                items (LocalSymbolDataProvider.operands) { operand ->
+                    HomeScreenTextButton(
+                        text = operand.value,
+                        onClick = { /*TODO*/ },
+                        isPrimaryColor = true
+                    )
+                }
+                item {
+                    Button(onClick = { /*TODO*/ }, modifier = Modifier.matchParentSize()) {
+                        Text(
+                            text = LocalSymbolDataProvider.equalSymbol.value,
+                            style = MaterialTheme.typography.headlineMedium
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
 
 @Composable
 fun HomeScreenImageBorderAnimation(
@@ -145,4 +216,10 @@ fun HomeScreenBackspaceButtonPreview() {
 @Composable
 fun HomeScreenImageBorderAnimationPreview() {
     HomeScreenImageBorderAnimation()
+}
+
+@Preview
+@Composable
+fun HomeScreenButtonListPreview() {
+    HomeScreenButtonList()
 }
