@@ -13,9 +13,9 @@ object LocalDigitDataProvider {
         Digit("1"),
         Digit("2"),
         Digit("3"),
-        Digit(""),
-        Digit("0"),
-        Digit("."),
     )
-
+    val zeroAndDot = listOf(
+        Digit("0"),
+        Digit(".")
+    )
 }
