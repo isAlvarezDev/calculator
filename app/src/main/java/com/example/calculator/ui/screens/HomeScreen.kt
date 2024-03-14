@@ -18,6 +18,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -39,9 +40,22 @@ import androidx.compose.ui.unit.dp
 import com.example.calculator.R
 import com.example.calculator.data.local.LocalDigitDataProvider
 import com.example.calculator.data.local.LocalSymbolDataProvider
+import com.example.calculator.ui.theme.CalculatorTheme
 
 @Composable
-fun HomeScreenButtonList(
+private fun HomeScreenTextField(
+    value: String,
+    onValueChange: (String) -> Unit,
+) {
+    TextField(
+        value = value,
+        onValueChange = onValueChange,
+        enabled = false
+    )
+}
+
+@Composable
+private fun HomeScreenButtonList(
     onClickClear: () -> Unit,
     onClickBackspace: () -> Unit,
     onClickPercentage: () -> Unit,
@@ -159,7 +173,7 @@ private fun HomeScreenSpinBorderAnimation(
                 }
                 .padding(12.dp)
 
-            )
+        )
     }
 }
 
@@ -243,6 +257,14 @@ fun HomeScreenImageBorderAnimationPreview() {
 @Composable
 fun HomeScreenEqualSymbolButtonPreview() {
     HomeScreenEqualSymbolButton(onClick = {})
+}
+
+@Preview
+@Composable
+fun HomeScreenTextFieldPreview() {
+    CalculatorTheme (darkTheme = true) {
+        HomeScreenTextField("1") {}
+    }
 }
 
 @Preview
