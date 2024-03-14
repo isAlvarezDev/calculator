@@ -42,6 +42,11 @@ import com.example.calculator.data.local.LocalSymbolDataProvider
 
 @Composable
 fun HomeScreenButtonList(
+    onClickClear: () -> Unit,
+    onClickBackspace: () -> Unit,
+    onClickPercentage: () -> Unit,
+    onClickDigit: () -> Unit,
+    onClickEqual: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Row(modifier = modifier) {
@@ -50,13 +55,13 @@ fun HomeScreenButtonList(
                 item {
                     HomeScreenTextButton(
                         text = LocalSymbolDataProvider.clearSymbol.value,
-                        onClick = { /*TODO*/ },
+                        onClick = onClickClear,
                         isPrimaryColor = true
                     )
                 }
                 item {
                     HomeScreenBackspaceButton(
-                        onClickImage = { /*TODO*/ },
+                        onClickImage = onClickBackspace,
                         modifier = modifier.matchParentSize()
 
 
@@ -65,14 +70,14 @@ fun HomeScreenButtonList(
                 item {
                     HomeScreenTextButton(
                         text = LocalSymbolDataProvider.percentageSymbol.value,
-                        onClick = { /*TODO*/ },
+                        onClick = onClickPercentage,
                         isPrimaryColor = true
                     )
                 }
                 items(LocalDigitDataProvider.digits) { digit ->
                     HomeScreenTextButton(
                         text = digit.number,
-                        onClick = { /*TODO*/ },
+                        onClick = onClickDigit,
                         isPrimaryColor = false
                     )
                 }
@@ -84,7 +89,7 @@ fun HomeScreenButtonList(
                 items(LocalDigitDataProvider.zeroAndDot) { digit ->
                     HomeScreenTextButton(
                         text = digit.number,
-                        onClick = { /*TODO*/ },
+                        onClick = onClickDigit,
                         isPrimaryColor = false,
                         modifier = Modifier.clip(CircleShape)
                     )
@@ -96,20 +101,18 @@ fun HomeScreenButtonList(
                 items(LocalSymbolDataProvider.operands) { operand ->
                     HomeScreenTextButton(
                         text = operand.value,
-                        onClick = { /*TODO*/ },
+                        onClick = onClickDigit,
                         isPrimaryColor = true
                     )
                 }
-                item {
-                    HomeScreenEqualSymbolButton(onClick = {})
-                }
+                item { HomeScreenEqualSymbolButton(onClick = onClickEqual) }
             }
         }
     }
 }
 
 @Composable
-fun HomeScreenSpinBorderAnimation(
+private fun HomeScreenSpinBorderAnimation(
     modifier: Modifier = Modifier
 ) {
     var isSpinningBackwards by rememberSaveable { mutableStateOf(false) }
@@ -161,7 +164,7 @@ fun HomeScreenSpinBorderAnimation(
 }
 
 @Composable
-fun HomeScreenEqualSymbolButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
+private fun HomeScreenEqualSymbolButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
     Button(
         onClick = onClick,
         shape = CircleShape,
@@ -175,13 +178,14 @@ fun HomeScreenEqualSymbolButton(onClick: () -> Unit, modifier: Modifier = Modifi
 }
 
 @Composable
-fun HomeScreenBackspaceButton(
+private fun HomeScreenBackspaceButton(
     onClickImage: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     TextButton(
         onClick = onClickImage,
         shape = MaterialTheme.shapes.extraSmall,
+        modifier = modifier
     ) {
         Image(
             painter = painterResource(R.drawable.ic_outline_backspace),
@@ -193,7 +197,7 @@ fun HomeScreenBackspaceButton(
 }
 
 @Composable
-fun HomeScreenTextButton(
+private fun HomeScreenTextButton(
     text: String,
     onClick: () -> Unit,
     isPrimaryColor: Boolean,
@@ -244,5 +248,10 @@ fun HomeScreenEqualSymbolButtonPreview() {
 @Preview
 @Composable
 fun HomeScreenButtonListPreview() {
-    HomeScreenButtonList()
+    HomeScreenButtonList(
+        onClickClear = { /*TODO*/ },
+        onClickBackspace = { /*TODO*/ },
+        onClickPercentage = { /*TODO*/ },
+        onClickDigit = { /*TODO*/ },
+        onClickEqual = { /*TODO*/ })
 }
