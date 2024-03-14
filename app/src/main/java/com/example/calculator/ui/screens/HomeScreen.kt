@@ -14,6 +14,8 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -96,15 +98,7 @@ fun HomeScreenButtonList(
                     )
                 }
                 item {
-                    Button(
-                        onClick = { /*TODO*/ },
-                        shape = CircleShape
-                    ) {
-                        Text(
-                            text = LocalSymbolDataProvider.equalSymbol.value,
-                            style = MaterialTheme.typography.headlineMedium
-                        )
-                    }
+                    HomeScreenEqualSymbolButton(onClick = {})
                 }
             }
         }
@@ -165,6 +159,20 @@ fun HomeScreenImageBorderAnimation(
 }
 
 @Composable
+fun HomeScreenEqualSymbolButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
+    Button(
+        onClick = onClick,
+        shape = CircleShape,
+        modifier = modifier
+    ) {
+        Text(
+            text = LocalSymbolDataProvider.equalSymbol.value,
+            style = MaterialTheme.typography.headlineMedium
+        )
+    }
+}
+
+@Composable
 fun HomeScreenBackspaceButton(
     onClickImage: () -> Unit,
     modifier: Modifier = Modifier
@@ -196,7 +204,7 @@ fun HomeScreenTextButton(
     ) {
         Text(
             text = text,
-            color = if (isPrimaryColor) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onBackground,
+            color = if (isPrimaryColor) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.inverseSurface,
             style = MaterialTheme.typography.headlineMedium
         )
     }
@@ -219,10 +227,16 @@ fun HomeScreenBackspaceButtonPreview() {
     HomeScreenBackspaceButton(onClickImage = { /*TODO*/ })
 }
 
-@Preview(widthDp = 50, heightDp = 50)
+@Preview(widthDp = 60, heightDp = 60)
 @Composable
 fun HomeScreenImageBorderAnimationPreview() {
     HomeScreenImageBorderAnimation()
+}
+
+@Preview(widthDp = 60, heightDp = 60)
+@Composable
+fun HomeScreenEqualSymbolButtonPreview() {
+    HomeScreenEqualSymbolButton(onClick = {})
 }
 
 @Preview
