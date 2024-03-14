@@ -9,13 +9,12 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
-import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -24,6 +23,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
@@ -57,7 +57,9 @@ fun HomeScreenButtonList(
                 item {
                     HomeScreenBackspaceButton(
                         onClickImage = { /*TODO*/ },
-                        modifier = Modifier.matchParentSize()
+                        modifier = modifier.matchParentSize()
+
+
                     )
                 }
                 item {
@@ -75,15 +77,16 @@ fun HomeScreenButtonList(
                     )
                 }
                 item {
-                    HomeScreenImageBorderAnimation(
-                        modifier = Modifier.matchParentSize()
+                    HomeScreenSpinBorderAnimation(
+                        modifier = Modifier.wrapContentSize(Alignment.Center)
                     )
                 }
                 items(LocalDigitDataProvider.zeroAndDot) { digit ->
                     HomeScreenTextButton(
                         text = digit.number,
                         onClick = { /*TODO*/ },
-                        isPrimaryColor = false
+                        isPrimaryColor = false,
+                        modifier = Modifier.clip(CircleShape)
                     )
                 }
             }
@@ -106,12 +109,12 @@ fun HomeScreenButtonList(
 }
 
 @Composable
-fun HomeScreenImageBorderAnimation(
+fun HomeScreenSpinBorderAnimation(
     modifier: Modifier = Modifier
 ) {
     var isSpinningBackwards by rememberSaveable { mutableStateOf(false) }
     val infiniteTransition = rememberInfiniteTransition(label = "")
-    val borderWidth = 10.dp.value
+    val borderWidth = 12.dp.value
     val colors = listOf(
         Color(MaterialTheme.colorScheme.primary.value),
         Color(MaterialTheme.colorScheme.background.value),
@@ -132,14 +135,13 @@ fun HomeScreenImageBorderAnimation(
             )
         ), label = ""
     )
-    TextButton(onClick = { isSpinningBackwards = !isSpinningBackwards }) {
-        Image(
-            painter = painterResource(R.drawable.ic_android),
-            contentDescription = null,
-            colorFilter = ColorFilter.tint(
-                if (!isSpinningBackwards) MaterialTheme.colorScheme.primary
-                else MaterialTheme.colorScheme.secondary
-            ),
+    TextButton(
+        onClick = { isSpinningBackwards = !isSpinningBackwards },
+        modifier = Modifier
+            .padding(start = 2.dp)
+            .wrapContentSize(Alignment.Center)
+    ) {
+        Box(
             modifier = modifier
                 .drawBehind {
                     rotate(rotationAnimation.value)
@@ -152,9 +154,9 @@ fun HomeScreenImageBorderAnimation(
                         )
                     }
                 }
-                .padding(8.dp)
-                .clip(CircleShape)
-        )
+                .padding(12.dp)
+
+            )
     }
 }
 
@@ -167,7 +169,7 @@ fun HomeScreenEqualSymbolButton(onClick: () -> Unit, modifier: Modifier = Modifi
     ) {
         Text(
             text = LocalSymbolDataProvider.equalSymbol.value,
-            style = MaterialTheme.typography.headlineMedium
+            style = MaterialTheme.typography.headlineMedium,
         )
     }
 }
@@ -230,7 +232,7 @@ fun HomeScreenBackspaceButtonPreview() {
 @Preview(widthDp = 60, heightDp = 60)
 @Composable
 fun HomeScreenImageBorderAnimationPreview() {
-    HomeScreenImageBorderAnimation()
+    HomeScreenSpinBorderAnimation()
 }
 
 @Preview(widthDp = 60, heightDp = 60)

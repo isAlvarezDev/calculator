@@ -7,7 +7,7 @@ object LocalSymbolDataProvider {
     val percentageSymbol = Symbol("%")
     val operands = listOf(
         Symbol("/"),
-        Symbol("x"),
+        Symbol("*"),
         Symbol("-"),
         Symbol("+"),
     )
