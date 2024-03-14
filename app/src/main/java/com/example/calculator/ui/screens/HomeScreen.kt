@@ -13,8 +13,6 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.CutCornerShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -45,7 +43,7 @@ fun HomeScreenButtonList(
     modifier: Modifier = Modifier
 ) {
     Row(modifier = modifier) {
-        Box (modifier = Modifier.weight(3f)){
+        Box(modifier = Modifier.weight(3f)) {
             LazyVerticalGrid(columns = GridCells.Fixed(3)) {
                 item {
                     HomeScreenTextButton(
@@ -55,7 +53,10 @@ fun HomeScreenButtonList(
                     )
                 }
                 item {
-                    HomeScreenBackspaceButton(onClickImage = { /*TODO*/ }, modifier = Modifier.matchParentSize())
+                    HomeScreenBackspaceButton(
+                        onClickImage = { /*TODO*/ },
+                        modifier = Modifier.matchParentSize()
+                    )
                 }
                 item {
                     HomeScreenTextButton(
@@ -64,26 +65,30 @@ fun HomeScreenButtonList(
                         isPrimaryColor = true
                     )
                 }
-                items(LocalDigitDataProvider.digits) {digit ->
+                items(LocalDigitDataProvider.digits) { digit ->
                     HomeScreenTextButton(
                         text = digit.number,
                         onClick = { /*TODO*/ },
                         isPrimaryColor = false
                     )
                 }
-                item { HomeScreenImageBorderAnimation(modifier = Modifier.matchParentSize()) }
-                items(LocalDigitDataProvider.zeroAndDot) {digit ->
+                item {
+                    HomeScreenImageBorderAnimation(
+                        modifier = Modifier.matchParentSize()
+                    )
+                }
+                items(LocalDigitDataProvider.zeroAndDot) { digit ->
                     HomeScreenTextButton(
                         text = digit.number,
                         onClick = { /*TODO*/ },
-                        isPrimaryColor =false
+                        isPrimaryColor = false
                     )
                 }
             }
         }
-        Box (modifier = Modifier.weight(1f)){
+        Box(modifier = Modifier.weight(1f)) {
             LazyVerticalGrid(columns = GridCells.Fixed(1)) {
-                items (LocalSymbolDataProvider.operands) { operand ->
+                items(LocalSymbolDataProvider.operands) { operand ->
                     HomeScreenTextButton(
                         text = operand.value,
                         onClick = { /*TODO*/ },
@@ -91,7 +96,10 @@ fun HomeScreenButtonList(
                     )
                 }
                 item {
-                    Button(onClick = { /*TODO*/ }, modifier = Modifier.matchParentSize()) {
+                    Button(
+                        onClick = { /*TODO*/ },
+                        shape = CircleShape
+                    ) {
                         Text(
                             text = LocalSymbolDataProvider.equalSymbol.value,
                             style = MaterialTheme.typography.headlineMedium
@@ -109,7 +117,7 @@ fun HomeScreenImageBorderAnimation(
 ) {
     var isSpinningBackwards by rememberSaveable { mutableStateOf(false) }
     val infiniteTransition = rememberInfiniteTransition(label = "")
-    val borderWidth = 20.dp.value
+    val borderWidth = 10.dp.value
     val colors = listOf(
         Color(MaterialTheme.colorScheme.primary.value),
         Color(MaterialTheme.colorScheme.background.value),
@@ -146,11 +154,11 @@ fun HomeScreenImageBorderAnimation(
                             brush =
                             if (!isSpinningBackwards) Brush.horizontalGradient(colors)
                             else Brush.horizontalGradient(reverseColors),
-                            style = Stroke(borderWidth)
+                            style = Stroke(borderWidth),
                         )
                     }
                 }
-                .padding(10.dp)
+                .padding(8.dp)
                 .clip(CircleShape)
         )
     }
@@ -163,13 +171,12 @@ fun HomeScreenBackspaceButton(
 ) {
     TextButton(
         onClick = onClickImage,
-        shape = CutCornerShape(0.dp),
-        modifier = modifier
+        shape = MaterialTheme.shapes.extraSmall,
     ) {
         Image(
             painter = painterResource(R.drawable.ic_outline_backspace),
             contentDescription = null,
-            contentScale = ContentScale.Crop,
+            contentScale = ContentScale.Fit,
             colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.primary),
         )
     }
@@ -184,7 +191,7 @@ fun HomeScreenTextButton(
 ) {
     TextButton(
         onClick = onClick,
-        shape = RoundedCornerShape(0.dp),
+        shape = MaterialTheme.shapes.extraSmall,
         modifier = modifier
     ) {
         Text(
