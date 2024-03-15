@@ -7,7 +7,11 @@ import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -15,6 +19,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -43,14 +48,55 @@ import com.example.calculator.data.local.LocalSymbolDataProvider
 import com.example.calculator.ui.theme.CalculatorTheme
 
 @Composable
-private fun HomeScreenTextField(
+fun HomeScreen(
     value: String,
     onValueChange: (String) -> Unit,
+    onClickClear: () -> Unit,
+    onClickBackspace: () -> Unit,
+    onClickPercentage: () -> Unit,
+    onClickDigit: () -> Unit,
+    onClickEqual: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Column(modifier = modifier.fillMaxSize()) {
+        Box(
+            modifier = Modifier
+                .fillMaxHeight(.5f)
+                .fillMaxWidth()
+        ) {
+            HomeScreenTextField(
+                onValueChange = onValueChange,
+                value = value,
+                modifier = Modifier.fillMaxSize()
+            )
+        }
+        Divider(thickness = 2.dp, color = MaterialTheme.colorScheme.primary)
+        Box(modifier = Modifier.fillMaxSize()) {
+            HomeScreenButtonList(
+                onClickClear = onClickClear,
+                onClickBackspace = onClickBackspace,
+                onClickPercentage = onClickPercentage,
+                onClickDigit = onClickDigit,
+                onClickEqual = onClickEqual,
+                modifier = Modifier
+                    .fillMaxSize()
+            )
+        }
+    }
+}
+
+@Composable
+private fun HomeScreenTextField(
+    onValueChange: (String) -> Unit,
+    value: String,
+    modifier: Modifier = Modifier
 ) {
     TextField(
         value = value,
         onValueChange = onValueChange,
-        enabled = false
+        enabled = false,
+        textStyle = MaterialTheme.typography.headlineMedium,
+        modifier = modifier
     )
 }
 
@@ -76,7 +122,6 @@ private fun HomeScreenButtonList(
                 item {
                     HomeScreenBackspaceButton(
                         onClickImage = onClickBackspace,
-                        modifier = modifier.matchParentSize()
 
 
                     )
@@ -262,9 +307,7 @@ fun HomeScreenEqualSymbolButtonPreview() {
 @Preview
 @Composable
 fun HomeScreenTextFieldPreview() {
-    CalculatorTheme (darkTheme = true) {
-        HomeScreenTextField("1") {}
-    }
+    HomeScreenTextField(onValueChange = {}, value = "1")
 }
 
 @Preview
@@ -275,5 +318,23 @@ fun HomeScreenButtonListPreview() {
         onClickBackspace = { /*TODO*/ },
         onClickPercentage = { /*TODO*/ },
         onClickDigit = { /*TODO*/ },
-        onClickEqual = { /*TODO*/ })
+        onClickEqual = { /*TODO*/ }
+    )
+}
+
+@Preview
+@Composable
+fun HomeScreenPreview() {
+    CalculatorTheme(darkTheme = true) {
+        HomeScreen(
+            value = "1",
+            onValueChange = {},
+            onClickClear = { /*TODO*/ },
+            onClickBackspace = { /*TODO*/ },
+            onClickPercentage = { /*TODO*/ },
+            onClickDigit = { /*TODO*/ },
+            onClickEqual = { /*TODO*/ },
+            modifier = Modifier.fillMaxSize()
+        )
+    }
 }
