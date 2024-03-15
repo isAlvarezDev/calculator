@@ -6,6 +6,7 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -109,9 +110,9 @@ private fun HomeScreenButtonList(
     onClickEqual: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Row(modifier = modifier) {
+    Row {
         Box(modifier = Modifier.weight(3f)) {
-            LazyVerticalGrid(columns = GridCells.Fixed(3)) {
+            LazyVerticalGrid(columns = GridCells.Fixed(3), modifier = modifier, verticalArrangement = Arrangement.SpaceAround) {
                 item {
                     HomeScreenTextButton(
                         text = LocalSymbolDataProvider.clearSymbol.value,
@@ -119,13 +120,7 @@ private fun HomeScreenButtonList(
                         isPrimaryColor = true
                     )
                 }
-                item {
-                    HomeScreenBackspaceButton(
-                        onClickImage = onClickBackspace,
-
-
-                    )
-                }
+                item { HomeScreenBackspaceButton(onClickImage = onClickBackspace) }
                 item {
                     HomeScreenTextButton(
                         text = LocalSymbolDataProvider.percentageSymbol.value,
@@ -156,7 +151,7 @@ private fun HomeScreenButtonList(
             }
         }
         Box(modifier = Modifier.weight(1f)) {
-            LazyVerticalGrid(columns = GridCells.Fixed(1)) {
+            LazyVerticalGrid(columns = GridCells.Fixed(1), modifier = modifier, verticalArrangement = Arrangement.SpaceAround) {
                 items(LocalSymbolDataProvider.operands) { operand ->
                     HomeScreenTextButton(
                         text = operand.value,
@@ -231,7 +226,7 @@ private fun HomeScreenEqualSymbolButton(onClick: () -> Unit, modifier: Modifier 
     ) {
         Text(
             text = LocalSymbolDataProvider.equalSymbol.value,
-            style = MaterialTheme.typography.headlineMedium,
+            style = MaterialTheme.typography.headlineLarge,
         )
     }
 }
@@ -244,12 +239,12 @@ private fun HomeScreenBackspaceButton(
     TextButton(
         onClick = onClickImage,
         shape = MaterialTheme.shapes.extraSmall,
-        modifier = modifier
+        modifier = modifier.padding(top = 2.dp)
     ) {
         Image(
             painter = painterResource(R.drawable.ic_outline_backspace),
             contentDescription = null,
-            contentScale = ContentScale.Fit,
+            contentScale = ContentScale.Crop,
             colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.primary),
         )
     }
@@ -270,7 +265,7 @@ private fun HomeScreenTextButton(
         Text(
             text = text,
             color = if (isPrimaryColor) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.inverseSurface,
-            style = MaterialTheme.typography.headlineMedium
+            style = MaterialTheme.typography.headlineLarge
         )
     }
 }
