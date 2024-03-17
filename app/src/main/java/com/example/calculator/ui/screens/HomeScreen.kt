@@ -40,24 +40,28 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.calculator.R
 import com.example.calculator.data.local.LocalDigitDataProvider
 import com.example.calculator.data.local.LocalSymbolDataProvider
-import com.example.calculator.ui.theme.CalculatorTheme
 
 @Composable
 fun HomeScreen(
-    text: Int,
+    text: String,
     onClickClear: () -> Unit,
     onClickBackspace: () -> Unit,
     onClickPercentage: () -> Unit,
-    onClickDigit: () -> Unit,
+    onClickDigit: (String) -> Unit,
     onClickEqual: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(modifier = modifier.fillMaxSize()) {
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(20.dp)
+    ) {
         Box(
             modifier = Modifier
                 .fillMaxHeight(.5f)
@@ -74,7 +78,7 @@ fun HomeScreen(
                 onClickClear = onClickClear,
                 onClickBackspace = onClickBackspace,
                 onClickPercentage = onClickPercentage,
-                onClickDigit = onClickDigit,
+                onClickDigit = { onClickDigit(it) },
                 onClickEqual = onClickEqual,
                 modifier = Modifier
                     .fillMaxSize()
@@ -85,13 +89,14 @@ fun HomeScreen(
 
 @Composable
 private fun HomeScreenTextItem(
-    text: Int,
+    text: String,
     modifier: Modifier = Modifier
 ) {
     Text(
-        text = text.toString(),
+        text = text,
         color = MaterialTheme.colorScheme.inverseSurface,
-        style = MaterialTheme.typography.headlineLarge,
+        style = MaterialTheme.typography.displayLarge,
+        textAlign = TextAlign.Right,
         modifier = modifier
     )
 }
@@ -101,7 +106,7 @@ private fun HomeScreenButtonList(
     onClickClear: () -> Unit,
     onClickBackspace: () -> Unit,
     onClickPercentage: () -> Unit,
-    onClickDigit: () -> Unit,
+    onClickDigit: (String) -> Unit,
     onClickEqual: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -126,7 +131,7 @@ private fun HomeScreenButtonList(
                 items(LocalDigitDataProvider.digits) { digit ->
                     HomeScreenTextButton(
                         text = digit.number,
-                        onClick = onClickDigit,
+                        onClick = { onClickDigit(digit.number) },
                         isPrimaryColor = false
                     )
                 }
@@ -138,7 +143,7 @@ private fun HomeScreenButtonList(
                 items(LocalDigitDataProvider.zeroAndDot) { digit ->
                     HomeScreenTextButton(
                         text = digit.number,
-                        onClick = onClickDigit,
+                        onClick = { onClickDigit(digit.number) },
                         isPrimaryColor = false,
                         modifier = Modifier.clip(CircleShape)
                     )
@@ -150,7 +155,7 @@ private fun HomeScreenButtonList(
                 items(LocalSymbolDataProvider.operands) { operand ->
                     HomeScreenTextButton(
                         text = operand.value,
-                        onClick = onClickDigit,
+                        onClick = { onClickDigit(operand.value) },
                         isPrimaryColor = true
                     )
                 }
@@ -297,7 +302,7 @@ fun HomeScreenEqualSymbolButtonPreview() {
 @Preview
 @Composable
 fun HomeScreenTextItemPreview() {
-    HomeScreenTextItem(text = 1)
+    HomeScreenTextItem(text = "1")
 }
 
 @Preview
@@ -310,20 +315,4 @@ fun HomeScreenButtonListPreview() {
         onClickDigit = { /*TODO*/ },
         onClickEqual = { /*TODO*/ }
     )
-}
-
-@Preview
-@Composable
-fun HomeScreenPreview() {
-    CalculatorTheme(darkTheme = true) {
-        HomeScreen(
-            text = 1,
-            onClickClear = { /*TODO*/ },
-            onClickBackspace = { /*TODO*/ },
-            onClickPercentage = { /*TODO*/ },
-            onClickDigit = { /*TODO*/ },
-            onClickEqual = { /*TODO*/ },
-            modifier = Modifier.fillMaxSize()
-        )
-    }
 }

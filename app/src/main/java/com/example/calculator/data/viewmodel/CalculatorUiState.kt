@@ -1,5 +1,6 @@
 package com.example.calculator.data.viewmodel
 
 data class CalculatorUiState(
-    val currentValue: Int = 0,
+    val currentIntValue: Int = 0,
+    val currentStringValue: String = ""
 )
