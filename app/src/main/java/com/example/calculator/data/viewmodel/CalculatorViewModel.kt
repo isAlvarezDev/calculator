@@ -11,9 +11,15 @@ class CalculatorViewModel: ViewModel() {
     )
     val uiState: StateFlow<CalculatorUiState> = _uiState
 
-    fun updateCurrentDigit(digit: String) {
+    fun updateCurrentValue(digit: String) {
         _uiState.update {
             it.copy(currentStringValue = it.currentStringValue + digit)
+        }
+    }
+
+    fun removeCurrentValue() {
+        _uiState.update {
+            it.copy(currentStringValue = "")
         }
     }
 }
