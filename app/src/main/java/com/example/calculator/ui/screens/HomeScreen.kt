@@ -24,7 +24,6 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -50,8 +49,7 @@ import com.example.calculator.ui.theme.CalculatorTheme
 
 @Composable
 fun HomeScreen(
-    value: String,
-    onValueChange: (String) -> Unit,
+    text: Int,
     onClickClear: () -> Unit,
     onClickBackspace: () -> Unit,
     onClickPercentage: () -> Unit,
@@ -65,10 +63,9 @@ fun HomeScreen(
                 .fillMaxHeight(.5f)
                 .fillMaxWidth()
         ) {
-            HomeScreenTextField(
-                onValueChange = onValueChange,
-                value = value,
-                modifier = Modifier.fillMaxSize()
+            HomeScreenTextItem(
+                text = text,
+                modifier = Modifier.align(Alignment.BottomEnd)
             )
         }
         Divider(thickness = 2.dp, color = MaterialTheme.colorScheme.primary)
@@ -87,16 +84,14 @@ fun HomeScreen(
 }
 
 @Composable
-private fun HomeScreenTextField(
-    onValueChange: (String) -> Unit,
-    value: String,
+private fun HomeScreenTextItem(
+    text: Int,
     modifier: Modifier = Modifier
 ) {
-    TextField(
-        value = value,
-        onValueChange = onValueChange,
-        enabled = false,
-        textStyle = MaterialTheme.typography.headlineMedium,
+    Text(
+        text = text.toString(),
+        color = MaterialTheme.colorScheme.inverseSurface,
+        style = MaterialTheme.typography.headlineLarge,
         modifier = modifier
     )
 }
@@ -301,8 +296,8 @@ fun HomeScreenEqualSymbolButtonPreview() {
 
 @Preview
 @Composable
-fun HomeScreenTextFieldPreview() {
-    HomeScreenTextField(onValueChange = {}, value = "1")
+fun HomeScreenTextItemPreview() {
+    HomeScreenTextItem(text = 1)
 }
 
 @Preview
@@ -322,8 +317,7 @@ fun HomeScreenButtonListPreview() {
 fun HomeScreenPreview() {
     CalculatorTheme(darkTheme = true) {
         HomeScreen(
-            value = "1",
-            onValueChange = {},
+            text = 1,
             onClickClear = { /*TODO*/ },
             onClickBackspace = { /*TODO*/ },
             onClickPercentage = { /*TODO*/ },
