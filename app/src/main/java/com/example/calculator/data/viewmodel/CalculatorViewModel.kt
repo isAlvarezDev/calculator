@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 
-class CalculatorViewModel: ViewModel() {
+class CalculatorViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(
         CalculatorUiState()
     )
@@ -28,6 +28,17 @@ class CalculatorViewModel: ViewModel() {
         val removeLastValue = listValue.dropLast(2)
         _uiState.update {
             it.copy(currentStringValue = removeLastValue.joinToString(""))
+        }
+    }
+
+    fun getPercentage() {
+        val currentValue = uiState.value.currentStringValue
+        try {
+            _uiState.update { it.copy(currentStringValue = (currentValue.toDouble() / 100).toString()) }
+        } catch (e:NumberFormatException) {
+            _uiState.update { it.copy(currentStringValue = "Error") }
+        } catch (e: ArithmeticException) {
+            _uiState.update { it.copy(currentStringValue = "Error") }
         }
     }
 }
