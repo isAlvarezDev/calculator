@@ -39,10 +39,10 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.example.calculator.R
 import com.example.calculator.data.local.LocalDigitDataProvider
 import com.example.calculator.data.local.LocalSymbolDataProvider
@@ -60,7 +60,7 @@ fun HomeScreen(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding(20.dp)
+            .padding(dimensionResource(id = R.dimen.homescreen_padding))
     ) {
         Box(
             modifier = Modifier
@@ -72,7 +72,10 @@ fun HomeScreen(
                 modifier = Modifier.align(Alignment.BottomEnd)
             )
         }
-        Divider(thickness = 2.dp, color = MaterialTheme.colorScheme.primary)
+        Divider(
+            thickness = dimensionResource(R.dimen.thickness),
+            color = MaterialTheme.colorScheme.primary
+        )
         Box(modifier = Modifier.fillMaxSize()) {
             HomeScreenButtonList(
                 onClickClear = onClickClear,
@@ -171,7 +174,7 @@ private fun HomeScreenSpinBorderAnimation(
 ) {
     var isSpinningBackwards by rememberSaveable { mutableStateOf(false) }
     val infiniteTransition = rememberInfiniteTransition(label = "")
-    val borderWidth = 12.dp.value
+    val borderWidth = dimensionResource(id = R.dimen.medium_padding)
     val colors = listOf(
         Color(MaterialTheme.colorScheme.primary.value),
         Color(MaterialTheme.colorScheme.background.value),
@@ -195,7 +198,7 @@ private fun HomeScreenSpinBorderAnimation(
     TextButton(
         onClick = { isSpinningBackwards = !isSpinningBackwards },
         modifier = Modifier
-            .padding(start = 2.dp)
+            .padding(start = dimensionResource(id = R.dimen.small_padding))
             .wrapContentSize(Alignment.Center)
     ) {
         Box(
@@ -207,11 +210,11 @@ private fun HomeScreenSpinBorderAnimation(
                             brush =
                             if (!isSpinningBackwards) Brush.horizontalGradient(colors)
                             else Brush.horizontalGradient(reverseColors),
-                            style = Stroke(borderWidth),
+                            style = Stroke(borderWidth.value),
                         )
                     }
                 }
-                .padding(12.dp)
+                .padding(dimensionResource(id = R.dimen.medium_padding))
 
         )
     }
@@ -239,7 +242,7 @@ private fun HomeScreenBackspaceButton(
     TextButton(
         onClick = onClickImage,
         shape = MaterialTheme.shapes.extraSmall,
-        modifier = modifier.padding(top = 2.dp)
+        modifier = modifier.padding(top = dimensionResource(id = R.dimen.small_padding))
     ) {
         Image(
             painter = painterResource(R.drawable.ic_outline_backspace),
