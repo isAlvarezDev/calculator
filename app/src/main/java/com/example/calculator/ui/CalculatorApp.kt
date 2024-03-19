@@ -14,10 +14,12 @@ fun CalculatorApp() {
     
     HomeScreen(
         text = uiState.currentStringValue,
+        isSpinningBackwards = viewModel.isSpinningBackwards,
         onClickClear = { viewModel.clearValue() },
         onClickBackspace = { viewModel.backspaceAction() },
         onClickPercentage = { viewModel.getPercentage() },
         onClickDigit = { viewModel.updateCurrentValue(it) },
-        onClickEqual = { viewModel.equalsAction() }
+        onClickEqual = { viewModel.equalsAction() },
+        onClickSpinning = {viewModel.spinningAction()}
     )
 }
