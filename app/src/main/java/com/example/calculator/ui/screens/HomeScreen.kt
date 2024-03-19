@@ -5,7 +5,6 @@ import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -35,12 +34,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.rotate
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.calculator.R
@@ -123,7 +119,11 @@ private fun HomeScreenButtonList(
                         isPrimaryColor = true
                     )
                 }
-                item { HomeScreenBackspaceButton(onClickImage = onClickBackspace) }
+                item { HomeScreenTextButton(
+                    text = LocalSymbolDataProvider.backspaceSymbol.value,
+                    onClick = onClickBackspace,
+                    isPrimaryColor = true
+                ) }
                 item {
                     HomeScreenTextButton(
                         text = LocalSymbolDataProvider.percentageSymbol.value,
@@ -162,7 +162,9 @@ private fun HomeScreenButtonList(
                         isPrimaryColor = true
                     )
                 }
-                item { HomeScreenEqualSymbolButton(onClick = onClickEqual) }
+                item { HomeScreenEqualSymbolButton(
+                    onClick = onClickEqual,
+                ) }
             }
         }
     }
@@ -229,26 +231,7 @@ private fun HomeScreenEqualSymbolButton(onClick: () -> Unit, modifier: Modifier 
     ) {
         Text(
             text = LocalSymbolDataProvider.equalSymbol.value,
-            style = MaterialTheme.typography.headlineLarge,
-        )
-    }
-}
-
-@Composable
-private fun HomeScreenBackspaceButton(
-    onClickImage: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    TextButton(
-        onClick = onClickImage,
-        shape = MaterialTheme.shapes.extraSmall,
-        modifier = modifier.padding(top = dimensionResource(id = R.dimen.small_padding))
-    ) {
-        Image(
-            painter = painterResource(R.drawable.ic_outline_backspace),
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.primary),
+            style = MaterialTheme.typography.headlineLarge
         )
     }
 }
@@ -282,12 +265,6 @@ fun HomeScreenTextButtonPreview() {
         isPrimaryColor = false,
         onClick = {}
     )
-}
-
-@Preview
-@Composable
-fun HomeScreenBackspaceButtonPreview() {
-    HomeScreenBackspaceButton(onClickImage = { /*TODO*/ })
 }
 
 @Preview(widthDp = 60, heightDp = 60)
