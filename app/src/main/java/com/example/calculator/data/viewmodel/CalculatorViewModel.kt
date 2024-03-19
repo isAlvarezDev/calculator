@@ -2,7 +2,6 @@ package com.example.calculator.data.viewmodel
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -67,13 +66,13 @@ class CalculatorViewModel : ViewModel() {
         return result.toString()
     }
 
-    private fun addSubtractCalculate(passedList: MutableList<Any>): Float {
-        var result = passedList[0] as Float
+    private fun addSubtractCalculate(passedList: MutableList<Any>): Double {
+        var result = passedList[0] as Double
 
         for (index in passedList.indices) {
             if (passedList[index] is Char && index != passedList.lastIndex) {
                 val operator = passedList[index]
-                val nextDigit = passedList[index + 1] as Float
+                val nextDigit = passedList[index + 1] as Double
 
                 if (operator == '+') result += nextDigit
                 if (operator == '−') result -= nextDigit
@@ -98,8 +97,8 @@ class CalculatorViewModel : ViewModel() {
         for (index in passedList.indices) {
             if (passedList[index] is Char && index != passedList.lastIndex && index < restartIndex) {
                 val operator = passedList[index]
-                val prevDigit = passedList[index - 1] as Float
-                val nextDigit = passedList[index + 1] as Float
+                val prevDigit = passedList[index - 1] as Double
+                val nextDigit = passedList[index + 1] as Double
 
                 when (operator) {
                     '×' -> {
@@ -128,13 +127,13 @@ class CalculatorViewModel : ViewModel() {
         for (character in uiState.value.currentStringValue) {
             if (character.isDigit() || character == '.') currentDigit += character
              else {
-                list.add(currentDigit.toFloat())
+                list.add(currentDigit.toDouble())
                 currentDigit = ""
                 list.add(character)
             }
         }
 
-        if (currentDigit != "") list.add(currentDigit.toFloat())
+        if (currentDigit != "") list.add(currentDigit.toDouble())
 
         return list
     }
