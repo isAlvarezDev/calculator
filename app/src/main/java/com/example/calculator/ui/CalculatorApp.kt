@@ -18,5 +18,6 @@ fun CalculatorApp() {
         onClickBackspace = { viewModel.backspaceAction() },
         onClickPercentage = { viewModel.getPercentage() },
         onClickDigit = { viewModel.updateCurrentValue(it) },
-        onClickEqual = {  })
+        onClickEqual = { viewModel.equalsAction() }
+    )
 }
