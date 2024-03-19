@@ -37,6 +37,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.calculator.R
@@ -95,6 +96,7 @@ private fun HomeScreenTextItem(
         text = text,
         color = MaterialTheme.colorScheme.inverseSurface,
         style = MaterialTheme.typography.displayLarge,
+        fontWeight = FontWeight.Light,
         textAlign = TextAlign.Right,
         modifier = modifier
     )

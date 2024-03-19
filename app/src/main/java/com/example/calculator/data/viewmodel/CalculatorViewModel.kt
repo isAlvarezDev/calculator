@@ -23,11 +23,12 @@ class CalculatorViewModel : ViewModel() {
         }
     }
 
-    fun deleteLastValue() {
-        val listValue = uiState.value.currentStringValue.split("")
-        val removeLastValue = listValue.dropLast(2)
-        _uiState.update {
-            it.copy(currentStringValue = removeLastValue.joinToString(""))
+    fun backspaceAction() {
+        val length = uiState.value.currentStringValue.length
+        if (length > 0) {
+            _uiState.update {
+                it.copy(currentStringValue = it.currentStringValue.substring(0, length - 1))
+            }
         }
     }
 
