@@ -96,7 +96,6 @@ private fun HomeScreenTextItem(
         text = text,
         color = MaterialTheme.colorScheme.inverseSurface,
         style = MaterialTheme.typography.displayLarge,
-        fontWeight = FontWeight.Light,
         textAlign = TextAlign.Right,
         modifier = modifier
     )
