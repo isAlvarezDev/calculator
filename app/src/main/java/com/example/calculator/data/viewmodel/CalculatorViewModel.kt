@@ -17,11 +17,7 @@ class CalculatorViewModel : ViewModel() {
         }
     }
 
-    fun removeCurrentValue() {
-        _uiState.update {
-            it.copy(currentStringValue = "")
-        }
-    }
+    fun clearValue() = _uiState.update { it.copy(currentStringValue = "") }
 
     fun backspaceAction() {
         val length = uiState.value.currentStringValue.length

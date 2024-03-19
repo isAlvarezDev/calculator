@@ -14,7 +14,7 @@ fun CalculatorApp() {
     
     HomeScreen(
         text = uiState.currentStringValue,
-        onClickClear = { viewModel.removeCurrentValue() },
+        onClickClear = { viewModel.clearValue() },
         onClickBackspace = { viewModel.backspaceAction() },
         onClickPercentage = { viewModel.getPercentage() },
         onClickDigit = { viewModel.updateCurrentValue(it) },
