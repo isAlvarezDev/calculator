@@ -34,8 +34,10 @@ class CalculatorViewModel : ViewModel() {
     fun getPercentage() {
         val currentValue = uiState.value.currentStringValue
         try {
-            _uiState.update { it.copy(currentStringValue = (currentValue.toDouble() / 100).toString()) }
-        } catch (e:NumberFormatException) {
+            if (currentValue.isNotEmpty()) {
+                _uiState.update { it.copy(currentStringValue = (currentValue.toDouble() / 100).toString()) }
+            }
+        } catch (e: NumberFormatException) {
             _uiState.update { it.copy(currentStringValue = "Error") }
         } catch (e: ArithmeticException) {
             _uiState.update { it.copy(currentStringValue = "Error") }
