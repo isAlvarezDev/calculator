@@ -50,6 +50,8 @@ fun HomeScreen(
     onClickPercentage: () -> Unit,
     onClickDigit: (String) -> Unit,
     onClickEqual: () -> Unit,
+    isSpinningBackwards: Boolean,
+    onClickSpinning: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -78,6 +80,8 @@ fun HomeScreen(
                 onClickPercentage = onClickPercentage,
                 onClickDigit = { onClickDigit(it) },
                 onClickEqual = onClickEqual,
+                isSpinningBackwards = isSpinningBackwards,
+                onClickSpinning = onClickSpinning,
                 modifier = Modifier
                     .fillMaxSize()
             )
@@ -106,6 +110,8 @@ private fun HomeScreenButtonList(
     onClickPercentage: () -> Unit,
     onClickDigit: (String) -> Unit,
     onClickEqual: () -> Unit,
+    onClickSpinning: () -> Unit,
+    isSpinningBackwards: Boolean,
     modifier: Modifier = Modifier
 ) {
     Row {
@@ -139,6 +145,8 @@ private fun HomeScreenButtonList(
                 }
                 item {
                     HomeScreenSpinBorderAnimation(
+                        isSpinningBackwards = isSpinningBackwards,
+                        onClickSpinning = onClickSpinning,
                         modifier = Modifier.wrapContentSize(Alignment.Center)
                     )
                 }
@@ -170,9 +178,10 @@ private fun HomeScreenButtonList(
 
 @Composable
 private fun HomeScreenSpinBorderAnimation(
+    onClickSpinning: () -> Unit,
+    isSpinningBackwards: Boolean,
     modifier: Modifier = Modifier
 ) {
-    var isSpinningBackwards by rememberSaveable { mutableStateOf(false) }
     val infiniteTransition = rememberInfiniteTransition(label = "")
     val borderWidth = dimensionResource(id = R.dimen.medium_padding)
     val colors = listOf(
@@ -196,7 +205,7 @@ private fun HomeScreenSpinBorderAnimation(
         ), label = ""
     )
     TextButton(
-        onClick = { isSpinningBackwards = !isSpinningBackwards },
+        onClick = onClickSpinning,
         modifier = Modifier
             .padding(start = dimensionResource(id = R.dimen.small_padding))
             .wrapContentSize(Alignment.Center)
@@ -268,7 +277,10 @@ fun HomeScreenTextButtonPreview() {
 @Preview(widthDp = 60, heightDp = 60)
 @Composable
 fun HomeScreenImageBorderAnimationPreview() {
-    HomeScreenSpinBorderAnimation()
+    HomeScreenSpinBorderAnimation(
+        isSpinningBackwards = false,
+        onClickSpinning = {}
+    )
 }
 
 @Preview(widthDp = 60, heightDp = 60)
@@ -291,6 +303,8 @@ fun HomeScreenButtonListPreview() {
         onClickBackspace = { /*TODO*/ },
         onClickPercentage = { /*TODO*/ },
         onClickDigit = { /*TODO*/ },
-        onClickEqual = { /*TODO*/ }
+        onClickEqual = { /*TODO*/ },
+        isSpinningBackwards = false,
+        onClickSpinning = {}
     )
 }

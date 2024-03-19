@@ -1,5 +1,9 @@
 package com.example.calculator.data.viewmodel
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -10,6 +14,12 @@ class CalculatorViewModel : ViewModel() {
         CalculatorUiState()
     )
     val uiState: StateFlow<CalculatorUiState> = _uiState
+
+    var isSpinningBackwards by mutableStateOf(false)
+
+    fun spinningAction() {
+        isSpinningBackwards = !isSpinningBackwards
+    }
 
     fun updateCurrentValue(digit: String) {
         _uiState.update {
@@ -52,7 +62,7 @@ class CalculatorViewModel : ViewModel() {
         val timesDivision = timesDivisionCalculate(digitsOperators)
         if (timesDivision.isEmpty()) return ""
 
-        val result =  addSubtractCalculate(timesDivision)
+        val result = addSubtractCalculate(timesDivision)
 
         return result.toString()
     }
