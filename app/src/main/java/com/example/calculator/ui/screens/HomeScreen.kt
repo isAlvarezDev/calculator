@@ -113,29 +113,25 @@ private fun HomeScreenButtonList(
         Box(modifier = Modifier.weight(3f)) {
             LazyVerticalGrid(columns = GridCells.Fixed(3), modifier = modifier, verticalArrangement = Arrangement.SpaceAround) {
                 item {
-                    HomeScreenTextButton(
+                    HomeScreenTextDigitButton(
                         text = LocalSymbolDataProvider.clearSymbol.value,
                         onClick = onClickClear,
-                        isPrimaryColor = true
                     )
                 }
-                item { HomeScreenTextButton(
+                item { HomeScreenTextDigitButton(
                     text = LocalSymbolDataProvider.backspaceSymbol.value,
                     onClick = onClickBackspace,
-                    isPrimaryColor = true
                 ) }
                 item {
-                    HomeScreenTextButton(
+                    HomeScreenTextDigitButton(
                         text = LocalSymbolDataProvider.percentageSymbol.value,
                         onClick = onClickPercentage,
-                        isPrimaryColor = true
                     )
                 }
                 items(LocalDigitDataProvider.digits) { digit ->
-                    HomeScreenTextButton(
+                    HomeScreenTextDigitButton(
                         text = digit.number,
                         onClick = { onClickDigit(digit.number) },
-                        isPrimaryColor = false
                     )
                 }
                 item {
@@ -146,10 +142,9 @@ private fun HomeScreenButtonList(
                     )
                 }
                 items(LocalDigitDataProvider.zeroAndDot) { digit ->
-                    HomeScreenTextButton(
+                    HomeScreenTextDigitButton(
                         text = digit.number,
                         onClick = { onClickDigit(digit.number) },
-                        isPrimaryColor = false,
                     )
                 }
             }
@@ -157,10 +152,9 @@ private fun HomeScreenButtonList(
         Box(modifier = Modifier.weight(1f)) {
             LazyVerticalGrid(columns = GridCells.Fixed(1), modifier = modifier, verticalArrangement = Arrangement.SpaceAround) {
                 items(LocalSymbolDataProvider.operands) { operand ->
-                    HomeScreenTextButton(
+                    HomeScreenTextDigitButton(
                         text = operand.value,
                         onClick = { onClickDigit(operand.value) },
-                        isPrimaryColor = true
                     )
                 }
                 item { HomeScreenEqualSymbolButton(
@@ -239,11 +233,10 @@ private fun HomeScreenEqualSymbolButton(onClick: () -> Unit, modifier: Modifier 
 }
 
 @Composable
-private fun HomeScreenTextButton(
+private fun HomeScreenTextDigitButton(
     text: String,
-    onClick: () -> Unit,
-    isPrimaryColor: Boolean,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit
 ) {
     TextButton(
         onClick = onClick,
@@ -252,7 +245,7 @@ private fun HomeScreenTextButton(
     ) {
         Text(
             text = text,
-            color = if (isPrimaryColor) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.inverseSurface,
+            color = MaterialTheme.colorScheme.inverseSurface,
             style = MaterialTheme.typography.headlineLarge
         )
     }
@@ -261,10 +254,9 @@ private fun HomeScreenTextButton(
 
 @Preview
 @Composable
-fun HomeScreenTextButtonPreview() {
-    HomeScreenTextButton(
+fun HomeScreenTextDigitButtonPreview() {
+    HomeScreenTextDigitButton(
         text = "1",
-        isPrimaryColor = false,
         onClick = {}
     )
 }
