@@ -60,7 +60,7 @@ fun HomeScreen(
                 .fillMaxHeight(.5f)
                 .fillMaxWidth()
         ) {
-            HomeScreenTextItem(
+            HomeScreenTextResult(
                 text = text,
                 modifier = Modifier.align(Alignment.BottomEnd)
             )
@@ -85,7 +85,7 @@ fun HomeScreen(
 }
 
 @Composable
-private fun HomeScreenTextItem(
+private fun HomeScreenTextResult(
     text: String,
     modifier: Modifier = Modifier
 ) {
@@ -301,8 +301,8 @@ fun HomeScreenEqualSymbolButtonPreview() {
 
 @Preview
 @Composable
-fun HomeScreenTextItemPreview() {
-    HomeScreenTextItem(text = "1")
+fun HomeScreenTextResultPreview() {
+    HomeScreenTextResult(text = "1")
 }
 
 @Preview
