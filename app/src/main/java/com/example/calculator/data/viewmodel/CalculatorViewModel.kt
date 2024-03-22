@@ -44,13 +44,20 @@ class CalculatorViewModel : ViewModel() {
             if (currentValue.isNotEmpty()) {
                 _uiState.update { it.copy(currentStringValue = (currentValue.toDouble() / 100).toString()) }
             }
-        } catch (e: Exception) { _uiState.update { it.copy(currentStringValue = "Error") } }
+        } catch (e: Exception) {
+            _uiState.update { it.copy(currentStringValue = "Error") }
+        }
     }
 
     fun equalsAction() {
-        try{
-            _uiState.update { it.copy(currentStringValue = calculateResults()) }
-        } catch (e:Exception) {
+        try {
+            _uiState.update {
+                it.copy(
+                    currentStringValue =
+                    if (uiState.value.currentStringValue.isNotEmpty()) calculateResults() else ""
+                )
+            }
+        } catch (e: Exception) {
             _uiState.update { it.copy(currentStringValue = "Error") }
         }
     }
