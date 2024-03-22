@@ -19,6 +19,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -50,6 +51,10 @@ fun HomeScreen(
     onClickSpinning: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val color =
+        if (!isSpinningBackwards) MaterialTheme.colorScheme.primary
+        else MaterialTheme.colorScheme.error
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -67,10 +72,11 @@ fun HomeScreen(
         }
         Divider(
             thickness = dimensionResource(R.dimen.thickness),
-            color = MaterialTheme.colorScheme.primary
+            color = color
         )
         Box(modifier = Modifier.fillMaxSize()) {
             HomeScreenButtonList(
+                text = text,
                 onClickClear = onClickClear,
                 onClickBackspace = onClickBackspace,
                 onClickPercentage = onClickPercentage,
@@ -78,7 +84,8 @@ fun HomeScreen(
                 onClickEqual = onClickEqual,
                 isSpinningBackwards = isSpinningBackwards,
                 onClickSpinning = onClickSpinning,
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier.fillMaxSize(),
+                color = color
             )
         }
     }
@@ -100,6 +107,8 @@ private fun HomeScreenTextResult(
 
 @Composable
 private fun HomeScreenButtonList(
+    text: String,
+    color: Color,
     onClickClear: () -> Unit,
     onClickBackspace: () -> Unit,
     onClickPercentage: () -> Unit,
@@ -111,23 +120,31 @@ private fun HomeScreenButtonList(
 ) {
     Row {
         Box(modifier = Modifier.weight(3f)) {
-            LazyVerticalGrid(columns = GridCells.Fixed(3), modifier = modifier, verticalArrangement = Arrangement.SpaceAround) {
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(3),
+                modifier = modifier,
+                verticalArrangement = Arrangement.SpaceAround
+            ) {
                 item {
                     HomeScreenTextActionButton(
-                        text = LocalSymbolDataProvider.clearSymbol.value,
-                        isPrimary = isSpinningBackwards,
+                        text =
+                        if (text == "") LocalSymbolDataProvider.clearSymbol.value
+                        else "C",
+                        color = color,
                         onClick = onClickClear,
                     )
                 }
-                item { HomeScreenTextActionButton(
-                    text = LocalSymbolDataProvider.backspaceSymbol.value,
-                    isPrimary = isSpinningBackwards,
-                    onClick = onClickBackspace,
-                ) }
+                item {
+                    HomeScreenTextActionButton(
+                        text = LocalSymbolDataProvider.backspaceSymbol.value,
+                        color = color,
+                        onClick = onClickBackspace,
+                    )
+                }
                 item {
                     HomeScreenTextActionButton(
                         text = LocalSymbolDataProvider.percentageSymbol.value,
-                        isPrimary = isSpinningBackwards,
+                        color = color,
                         onClick = onClickPercentage,
                     )
                 }
@@ -153,15 +170,24 @@ private fun HomeScreenButtonList(
             }
         }
         Box(modifier = Modifier.weight(1f)) {
-            LazyVerticalGrid(columns = GridCells.Fixed(1), modifier = modifier, verticalArrangement = Arrangement.SpaceAround) {
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(1),
+                modifier = modifier,
+                verticalArrangement = Arrangement.SpaceAround
+            ) {
                 items(LocalSymbolDataProvider.operands) { operand ->
                     HomeScreenTextActionButton(
                         text = operand.value,
-                        isPrimary = isSpinningBackwards,
-                        onClick = { onClickDigit(operand.value) },
+                        color = color,
+                        onClick = { onClickDigit(operand.value) }
                     )
                 }
-                item { HomeScreenEqualSymbolButton(onClick = onClickEqual) }
+                item {
+                    HomeScreenEqualSymbolButton(
+                        color = color,
+                        onClick = onClickEqual
+                    )
+                }
             }
         }
     }
@@ -221,10 +247,15 @@ private fun HomeScreenSpinBorderAnimation(
 }
 
 @Composable
-private fun HomeScreenEqualSymbolButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
+private fun HomeScreenEqualSymbolButton(
+    onClick: () -> Unit,
+    color: Color,
+    modifier: Modifier = Modifier,
+) {
     Button(
         onClick = onClick,
         shape = CircleShape,
+        colors = ButtonDefaults.buttonColors(containerColor = color),
         modifier = modifier
     ) {
         Text(
@@ -237,8 +268,8 @@ private fun HomeScreenEqualSymbolButton(onClick: () -> Unit, modifier: Modifier 
 @Composable
 private fun HomeScreenTextActionButton(
     text: String,
+    color: Color,
     modifier: Modifier = Modifier,
-    isPrimary: Boolean,
     onClick: () -> Unit
 ) {
     TextButton(
@@ -248,8 +279,7 @@ private fun HomeScreenTextActionButton(
     ) {
         Text(
             text = text,
-            color =
-            if (!isPrimary) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error,
+            color = color,
             style = MaterialTheme.typography.headlineLarge
         )
     }
@@ -296,7 +326,7 @@ fun HomeScreenImageBorderAnimationPreview() {
 @Preview(widthDp = 60, heightDp = 60)
 @Composable
 fun HomeScreenEqualSymbolButtonPreview() {
-    HomeScreenEqualSymbolButton(onClick = {})
+    HomeScreenEqualSymbolButton(color =  Color.Magenta, onClick = {})
 }
 
 @Preview
@@ -309,6 +339,8 @@ fun HomeScreenTextResultPreview() {
 @Composable
 fun HomeScreenButtonListPreview() {
     HomeScreenButtonList(
+        text = "",
+        color = Color.LightGray,
         onClickClear = { /*TODO*/ },
         onClickBackspace = { /*TODO*/ },
         onClickPercentage = { /*TODO*/ },
