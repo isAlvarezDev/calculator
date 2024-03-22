@@ -113,18 +113,21 @@ private fun HomeScreenButtonList(
         Box(modifier = Modifier.weight(3f)) {
             LazyVerticalGrid(columns = GridCells.Fixed(3), modifier = modifier, verticalArrangement = Arrangement.SpaceAround) {
                 item {
-                    HomeScreenTextDigitButton(
+                    HomeScreenTextActionButton(
                         text = LocalSymbolDataProvider.clearSymbol.value,
+                        isPrimary = isSpinningBackwards,
                         onClick = onClickClear,
                     )
                 }
-                item { HomeScreenTextDigitButton(
+                item { HomeScreenTextActionButton(
                     text = LocalSymbolDataProvider.backspaceSymbol.value,
+                    isPrimary = isSpinningBackwards,
                     onClick = onClickBackspace,
                 ) }
                 item {
-                    HomeScreenTextDigitButton(
+                    HomeScreenTextActionButton(
                         text = LocalSymbolDataProvider.percentageSymbol.value,
+                        isPrimary = isSpinningBackwards,
                         onClick = onClickPercentage,
                     )
                 }
@@ -152,14 +155,13 @@ private fun HomeScreenButtonList(
         Box(modifier = Modifier.weight(1f)) {
             LazyVerticalGrid(columns = GridCells.Fixed(1), modifier = modifier, verticalArrangement = Arrangement.SpaceAround) {
                 items(LocalSymbolDataProvider.operands) { operand ->
-                    HomeScreenTextDigitButton(
+                    HomeScreenTextActionButton(
                         text = operand.value,
+                        isPrimary = isSpinningBackwards,
                         onClick = { onClickDigit(operand.value) },
                     )
                 }
-                item { HomeScreenEqualSymbolButton(
-                    onClick = onClickEqual,
-                ) }
+                item { HomeScreenEqualSymbolButton(onClick = onClickEqual) }
             }
         }
     }
@@ -227,6 +229,27 @@ private fun HomeScreenEqualSymbolButton(onClick: () -> Unit, modifier: Modifier 
     ) {
         Text(
             text = LocalSymbolDataProvider.equalSymbol.value,
+            style = MaterialTheme.typography.headlineLarge
+        )
+    }
+}
+
+@Composable
+private fun HomeScreenTextActionButton(
+    text: String,
+    modifier: Modifier = Modifier,
+    isPrimary: Boolean,
+    onClick: () -> Unit
+) {
+    TextButton(
+        onClick = onClick,
+        shape = MaterialTheme.shapes.extraSmall,
+        modifier = modifier
+    ) {
+        Text(
+            text = text,
+            color =
+            if (!isPrimary) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error,
             style = MaterialTheme.typography.headlineLarge
         )
     }
