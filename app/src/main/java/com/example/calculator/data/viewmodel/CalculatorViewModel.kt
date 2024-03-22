@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
+import net.objecthunter.exp4j.ExpressionBuilder
 
 class CalculatorViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(
@@ -55,86 +56,12 @@ class CalculatorViewModel : ViewModel() {
     }
 
     private fun calculateResults(): String {
-        val digitsOperators = digitsOperators()
-        if (digitsOperators().isEmpty()) return ""
-
-        val timesDivision = timesDivisionCalculate(digitsOperators)
-        if (timesDivision.isEmpty()) return ""
-
-        val result = addSubtractCalculate(timesDivision)
+        val expression = ExpressionBuilder(uiState.value.currentStringValue).build()
+        val currentOperation = expression.evaluate()
+        val result =
+            if (uiState.value.currentStringValue.contains(".")) currentOperation
+            else currentOperation.toInt()
 
         return result.toString()
-    }
-
-    private fun addSubtractCalculate(passedList: MutableList<Any>): Double {
-        var result = passedList[0] as Double
-
-        for (index in passedList.indices) {
-            if (passedList[index] is Char && index != passedList.lastIndex) {
-                val operator = passedList[index]
-                val nextDigit = passedList[index + 1] as Double
-
-                if (operator == '+') result += nextDigit
-                if (operator == '−') result -= nextDigit
-            }
-        }
-
-        return result
-    }
-
-    private fun timesDivisionCalculate(passedList: MutableList<Any>): MutableList<Any> {
-        var list = passedList
-        while (list.contains('×') || list.contains('/')) {
-            list = calcTimesDiv(list)
-        }
-        return list
-    }
-
-    private fun calcTimesDiv(passedList: MutableList<Any>): MutableList<Any> {
-        val newList = mutableListOf<Any>()
-        var restartIndex = passedList.size
-
-        for (index in passedList.indices) {
-            if (passedList[index] is Char && index != passedList.lastIndex && index < restartIndex) {
-                val operator = passedList[index]
-                val prevDigit = passedList[index - 1] as Double
-                val nextDigit = passedList[index + 1] as Double
-
-                when (operator) {
-                    '×' -> {
-                        newList.add(prevDigit * nextDigit)
-                        restartIndex = index + 1
-                    }
-                    '/' -> {
-                        newList.add(prevDigit / nextDigit)
-                        restartIndex = index + 1
-                    }
-                    else -> {
-                        newList.add(prevDigit)
-                        newList.add(operator)
-                    }
-                }
-            }
-            if (index > restartIndex) newList.add(passedList[index])
-        }
-        return newList
-    }
-
-    private fun digitsOperators(): MutableList<Any> {
-        val list = mutableListOf<Any>()
-        var currentDigit = ""
-
-        for (character in uiState.value.currentStringValue) {
-            if (character.isDigit() || character == '.') currentDigit += character
-             else {
-                list.add(currentDigit.toDouble())
-                currentDigit = ""
-                list.add(character)
-            }
-        }
-
-        if (currentDigit != "") list.add(currentDigit.toDouble())
-
-        return list
     }
 }

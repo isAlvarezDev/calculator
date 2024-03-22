@@ -8,8 +8,8 @@ object LocalSymbolDataProvider {
     val percentageSymbol = Symbol("%")
     val operands = listOf(
         Symbol("/"),
-        Symbol("×"),
-        Symbol("−"),
+        Symbol("*"),
+        Symbol("-"),
         Symbol("+"),
     )
     val equalSymbol = Symbol("=")
