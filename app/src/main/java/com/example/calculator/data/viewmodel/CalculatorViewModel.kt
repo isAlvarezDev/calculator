@@ -62,7 +62,7 @@ class CalculatorViewModel : ViewModel() {
         }
     }
 
-    private fun calculateResults(): String {
+    internal fun calculateResults(): String {
         val expression = ExpressionBuilder(uiState.value.currentStringValue).build()
         val currentOperation = expression.evaluate()
         val result =
