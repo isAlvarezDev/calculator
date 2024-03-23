@@ -34,7 +34,6 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import com.example.calculator.R
 import com.example.calculator.data.local.LocalDigitDataProvider
 import com.example.calculator.data.local.LocalSymbolDataProvider
@@ -302,51 +301,4 @@ private fun HomeScreenTextDigitButton(
             style = MaterialTheme.typography.headlineLarge
         )
     }
-}
-
-
-@Preview
-@Composable
-fun HomeScreenTextDigitButtonPreview() {
-    HomeScreenTextDigitButton(
-        text = "1",
-        onClick = {}
-    )
-}
-
-@Preview(widthDp = 60, heightDp = 60)
-@Composable
-fun HomeScreenImageBorderAnimationPreview() {
-    HomeScreenSpinBorderAnimation(
-        isSpinningBackwards = false,
-        onClickSpinning = {}
-    )
-}
-
-@Preview(widthDp = 60, heightDp = 60)
-@Composable
-fun HomeScreenEqualSymbolButtonPreview() {
-    HomeScreenEqualSymbolButton(color =  Color.Magenta, onClick = {})
-}
-
-@Preview
-@Composable
-fun HomeScreenTextResultPreview() {
-    HomeScreenTextResult(text = "1")
-}
-
-@Preview
-@Composable
-fun HomeScreenButtonListPreview() {
-    HomeScreenButtonList(
-        text = "",
-        color = Color.LightGray,
-        onClickClear = { /*TODO*/ },
-        onClickBackspace = { /*TODO*/ },
-        onClickPercentage = { /*TODO*/ },
-        onClickDigit = { /*TODO*/ },
-        onClickEqual = { /*TODO*/ },
-        isSpinningBackwards = false,
-        onClickSpinning = {}
-    )
 }
