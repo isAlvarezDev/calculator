@@ -67,7 +67,7 @@ class CalculatorViewModel : ViewModel() {
         val currentOperation = expression.evaluate()
         val result =
             if (uiState.value.currentStringValue.contains(".")) currentOperation
-            else currentOperation.toInt()
+            else currentOperation.toLong()
 
         return result.toString()
     }
