@@ -1,0 +1,264 @@
+[33mcommit fba318bb3064aa5a4231f221544cc3d7313d8909[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Sat Mar 23 22:25:16 2024 -0400
+
+    Readme added
+
+[33mcommit 098ca7f9b2f75bbaee6abec19ea04a176df146a8[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Sat Mar 23 16:27:38 2024 -0400
+
+    Added screenshots package for github
+
+[33mcommit d32886ece0160ce4910035e657f25aa2699c7033[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Sat Mar 23 14:52:48 2024 -0400
+
+    Result.toString changed by result.toLong in viewmodel and eliminated all previews
+
+[33mcommit 9e51a8830c2acec4a0dcecccde9bc36631890771[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Sat Mar 23 14:30:42 2024 -0400
+
+    Added foreground and background image of the application
+
+[33mcommit 5b7daa31d2c27d0f022a575f34ed8380e0016e4a[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Fri Mar 22 19:40:39 2024 -0400
+
+    Blocked landscape mode and modified fun equalsAction
+
+[33mcommit 78e5b2542c5acfb798614e08c205a745b2a9392e[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Fri Mar 22 19:00:27 2024 -0400
+
+    Implemented logic for clearSymbol and color in action buttons
+
+[33mcommit 18e137094b32eafdf2840aee1f2f87413335f915[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Fri Mar 22 17:55:20 2024 -0400
+
+    Replaced HomeScreenTextItem name for HomeScreenTextResult
+
+[33mcommit c8454b87f7241de757350eac698cdfeaaf2684ed[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Fri Mar 22 17:53:16 2024 -0400
+
+    Created fun HomeScreenTextActionButton for lazyVerticalGrid
+
+[33mcommit 93ac36816a074bedca5d5f9a4651461fe75cef8d[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Fri Mar 22 17:21:53 2024 -0400
+
+    Replaced HomeScreenTextButton name by HomeScreenTextDigitButton
+
+[33mcommit a65120f3d0cb5b78f5568f72ed622248ea52f6cf[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Fri Mar 22 17:13:27 2024 -0400
+
+    Added objecthunter library and erased all the equals action logic
+
+[33mcommit 952382c8911b835db1b1ae30faee78ca96a793c1[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Tue Mar 19 19:25:32 2024 -0400
+
+    Fixing some details
+
+[33mcommit 94acf0ffc98cdeb90b91bcdd461317fdc4b21965[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Tue Mar 19 18:03:36 2024 -0400
+
+    isSpinningBackwards property added and fun spinningAction in viewmodel
+
+[33mcommit bdf4b543813886b2c18385c75c3370513540b29a[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Tue Mar 19 16:14:51 2024 -0400
+
+    Added fun equalsAction including all its logic in viewmodel
+
+[33mcommit ed4646152270175dc6cafe28e2f7a89e65b26934[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Mon Mar 18 23:00:40 2024 -0400
+
+    Changed fun removeCurrentValue name to clearValue
+
+[33mcommit dc624c60e507b725a18c2c251ab4115988fd47e5[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Mon Mar 18 22:55:46 2024 -0400
+
+    Changed the name of fun removeLastValue to backspaceAction
+
+[33mcommit 063303835f5cd2378fc2bc7a48edcfee8eacdcc2[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Mon Mar 18 22:37:36 2024 -0400
+
+    Adjusting fun getPercentage adding an if inside try-catch
+
+[33mcommit f1a6537141d8b76089bfd6a1ac46446907f59960[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Mon Mar 18 22:27:37 2024 -0400
+
+    Deleting fun HomeScreenBackspaceButton, xml and preview and changed for a val backspaceSymbol
+
+[33mcommit 59d8e7e504d6cca82cc2298174ed11cf36e500b1[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Mon Mar 18 18:21:35 2024 -0400
+
+    Upgraded AGP dependency from 8.3.0 to 8.3.1
+
+[33mcommit f5ac8a69148de7c02de847193abf40c553583ef8[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Sun Mar 17 19:27:19 2024 -0400
+
+    Incorporating dimens.xml
+
+[33mcommit 5e58913cfa3a0c17fc193507d61b0ed7784c6f80[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Sun Mar 17 19:16:20 2024 -0400
+
+    Created fun getPercentage in viewmodel
+
+[33mcommit 5bffd59f483c6c65eccc6a4de4234b7ea8e54fc5[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Sun Mar 17 15:51:01 2024 -0400
+
+    Created fun deleteLastValue in viewmodel
+
+[33mcommit 768ee42c86cc738d4d945eef179e4d1b5559ac8f[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Sun Mar 17 15:03:06 2024 -0400
+
+    Created fun removeCurrentValue in viewmodel
+
+[33mcommit ee415b783f676bb866e78bf22f4455768d203a44[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Sun Mar 17 14:51:48 2024 -0400
+
+    Adding fun CalculatorApp, another uiState and
+    fun updateCurrentDigit in the viewmodel
+
+[33mcommit b7d85e5f6597d55207538f5566c498406eac53ef[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Sun Mar 17 13:50:59 2024 -0400
+
+    Added viewmodel for Calculator app
+
+[33mcommit 6b1e5386ed1ebc610e4dcc8b1ef00cdecc7fca22[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Sun Mar 17 13:40:49 2024 -0400
+
+    Changing the HomeScreenTextField to HomeScreenTextItem includind its composable
+
+[33mcommit e2f29e162ba5947ec19bd470a6dbe641417526a0[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Thu Mar 14 22:21:31 2024 -0400
+
+    Changing values in the LazyVerticalGrid
+
+[33mcommit 23a8c9f20a176efdbab0ba0f6cf47834be345da2[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Thu Mar 14 21:07:54 2024 -0400
+
+    Added fun HomeScreen
+
+[33mcommit f389b33439db40d95ec79d289231f26993b818c7[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Thu Mar 14 19:44:45 2024 -0400
+
+    Created fun HomeScreenTextField
+
+[33mcommit c563400587ce82d1f6cc66a9c5de8740f44e9bdf[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Thu Mar 14 19:34:52 2024 -0400
+
+    Adding parameters to HomeScreenButtonList
+
+[33mcommit 8ddde56d1b479c1e90e94818c9927a07281c6610[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Thu Mar 14 19:15:33 2024 -0400
+
+    Changing multiplication symbol value and the fun HomeScreenImageBorderAnimation by HomeScreenSpinBorderAnimation
+
+[33mcommit 2e439f2fbd8585660fc8fa979c54ab28df068c60[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Wed Mar 13 22:37:55 2024 -0400
+
+    Added fun HomeScreenEqualSymbolButton
+
+[33mcommit ccdfc4e42215c12165e3017038b2ef483a2659fd[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Wed Mar 13 22:15:04 2024 -0400
+
+    Editing size of ic_outline_backspace
+
+[33mcommit fd804cdf51a88c00439dc0adb70325930f6289ac[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Wed Mar 13 22:05:15 2024 -0400
+
+    Adding Shape.kt in Theme.kt
+
+[33mcommit 4e733c823300bb2500322da55973b9007c56fac1[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Wed Mar 13 18:38:41 2024 -0400
+
+    Creating fun HomeScreenButtonList and modifying LocalSymbol and Digit DataProvider
+
+[33mcommit a3b5def7b4dae6016f59e17651ad9cdaabf329a6[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Tue Mar 12 20:45:32 2024 -0400
+
+    Adding ic_android.xml and fun HomeScreenImageBorderAnimation
+
+[33mcommit e7c176f9bd968b0b10f9e1f33943c9fb94f26bb3[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Tue Mar 12 15:38:58 2024 -0400
+
+    Modifying the backspace drawable and HomeScreen.kt
+
+[33mcommit 9a7eb5cd3103483f0c4bd9771209aaad98889d28[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Tue Mar 12 14:43:19 2024 -0400
+
+    Adding backspace drawable and its function in HomeScreen
+
+[33mcommit 004d866a129092bc6eb5f7bfffb2cb6163f96554[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Mon Mar 11 22:02:06 2024 -0400
+
+    Editing LocalSymbolDataProvider
+
+[33mcommit 776dad7d27d09f70e776387aa863db1e0af278a1[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Mon Mar 11 19:35:04 2024 -0400
+
+    Adding HomeScreen.kt and fun HomeScreenTextButton
+
+[33mcommit b029536e22382e5e55a588bf800a2d1ca3665ca1[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Mon Mar 11 15:02:51 2024 -0400
+
+    Creating Symbol model and a LocalSymbolDataProvider
+
+[33mcommit cf5815e5856c94a75ec76516920dc330dd7738ee[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Mon Mar 11 15:00:18 2024 -0400
+
+    Creating a Digit model and a LocalDigitDataProvider
+
+[33mcommit 47d89e32a2d4d5c4ae93dec509e4eb2c1b880fb8[m
+Author: IsaacA <isaacgit@gmail.com>
+Date:   Mon Mar 11 14:53:39 2024 -0400
+
+    Beginning of project
+
+[33mcommit 3b22e0e79245e0b5484226670941413a11c0c5aa[m
+Author: IsaacA <157077804+isAlvarezDev@users.noreply.github.com>
+Date:   Mon Mar 25 19:17:57 2024 -0400
+
+    Merge my changes into feature branch
+
+[33mcommit 885b26c6e68fb4e38901373f758e7403f7d9391c[m
+Author: Isaac Alvarez <157077804+isAlvarezDev@users.noreply.github.com>
+Date:   Mon Mar 25 19:00:40 2024 -0400
+
+    Initial commit
